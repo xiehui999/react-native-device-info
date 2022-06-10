@@ -21,7 +21,13 @@ export const getUniqueId = () =>
     defaultValue: 'unknown',
     memoKey: 'uniqueId',
     supportedPlatforms: ['android', 'ios', 'windows'],
-    getter: () => RNDeviceInfo.uniqueId,
+    getter: () => {
+      if(Platform.OS === 'android'){
+        return RNDeviceInfo.getAndroidIdSync()
+      }else {
+        return RNDeviceInfo.uniqueId
+      }
+    }
   });
 
 let uniqueId: string;
